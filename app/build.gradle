@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+def keyStoreProperties = new Properties()
+keyStoreProperties.load(new FileInputStream(rootProject.file("keystores/signing.properties")))
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
@@ -15,10 +18,30 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        debug {
+            storeFile file(keyStoreProperties['keyPath_debug'])
+            storePassword keyStoreProperties['keyStore_debug']
+            keyAlias = keyStoreProperties['keyAlias']
+            keyPassword keyStoreProperties['keyPass_debug']
+        }
+        release {
+            storeFile file(keyStoreProperties['keyPath_release'])
+            storePassword keyStoreProperties['keyStore_release']
+            keyAlias = keyStoreProperties['keyAlias']
+            keyPassword keyStoreProperties['keyPass_release']
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "_debug"
+            signingConfig signingConfigs.debug
         }
     }
 }
