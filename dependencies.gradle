@@ -1,0 +1,22 @@
+apply from: 'versions.gradle'
+
+ext.deps = [:]
+
+// Crashlytics
+deps.crashlytics = "com.crashlytics.sdk.android:crashlytics:${versions.crashlytics}"
+
+// Firebase
+def firebase = [:]
+firebase.core = "com.google.firebase:firebase-core:${versions.firebase.core}"
+deps.firebase = firebase
+
+// Kotlin
+deps.kotlin_std_lib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+
+// Test
+def test = [:]
+test.junit = "junit:junit:${versions.test.junit}"
+deps.test = test
+
+// Timber
+deps.timber = "com.jakewharton.timber:timber:${versions.timber}"

@@ -1,0 +1,10 @@
+ext.config = [:]
+
+config.buildTools = "29.0.0"
+config.compileSdk = 29
+
+config.minSdk = 21
+config.targetSdk = 29
+config.testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+config.javaVersion = JavaVersion.VERSION_1_8
